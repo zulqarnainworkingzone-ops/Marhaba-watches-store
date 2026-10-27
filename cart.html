@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Vault & Checkout | CHRONOS ÉLITE</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Shared Styles -->
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .cart-page-section {
+            padding: 50px 0 90px;
+        }
+        .cart-page-grid {
+            display: grid;
+            grid-template-columns: 1.3fr 0.9fr;
+            gap: 40px;
+            align-items: start;
+        }
+        .cart-card-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-md);
+            padding: 30px;
+            box-shadow: var(--shadow-card);
+        }
+        .cart-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding-bottom: 16px;
+            margin-bottom: 24px;
+        }
+        .cart-card-header h2 {
+            font-size: 1.5rem;
+            color: #FFF;
+        }
+        .cart-page-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .cart-page-table th {
+            text-align: left;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--text-muted);
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+        .cart-page-table td {
+            padding: 18px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            vertical-align: middle;
+        }
+        .item-flex {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        .item-thumb {
+            width: 70px;
+            height: 70px;
+            border-radius: var(--radius-sm);
+            object-fit: cover;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .item-name {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #FFF;
+        }
+        .item-variant {
+            font-size: 0.78rem;
+            color: var(--gold-primary);
+        }
+        .price-col {
+            font-family: var(--font-heading);
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--gold-light);
+        }
+        .cart-summary-card {
+            background: rgba(14, 18, 26, 0.9);
+            border: 1px solid var(--border-active);
+            border-radius: var(--radius-md);
+            padding: 30px;
+            position: sticky;
+            top: 100px;
+            box-shadow: var(--shadow-card);
+        }
+        .checkout-box {
+            margin-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            padding-top: 24px;
+        }
+        @media (max-width: 992px) {
+            .cart-page-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- TOP ANNOUNCEMENT BAR -->
+    <div class="top-bar">
+        <div class="top-bar-container">
+            <div class="top-message">
+                <i class="fa-solid fa-crown"></i>
+                <span>Complimentary Insured Courier Delivery | Official Chronos Guarantee</span>
+            </div>
+            <div class="top-actions">
+                <div class="currency-selector">
+                    <label for="currencySelect"><i class="fa-solid fa-globe"></i></label>
+                    <select id="currencySelect" class="currency-select" onchange="setCurrency(this.value)">
+                        <option value="USD">USD ($)</option>
+                        <option value="EUR">EUR (€)</option>
+                        <option value="GBP">GBP (£)</option>
+                        <option value="PKR">PKR (₨)</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN HEADER -->
+    <header class="main-header" id="navbar">
+        <div class="header-container">
+            <a href="index.html" class="brand-logo">
+                <div class="logo-emblem">
+                    <svg viewBox="0 0 100 100" class="crown-svg">
+                        <circle cx="50" cy="50" r="46" stroke="url(#goldGrad)" stroke-width="2.5" fill="none"/>
+                        <circle cx="50" cy="50" r="41" stroke="#D4AF37" stroke-width="0.75" stroke-dasharray="3,3" fill="none"/>
+                        <path d="M50 18 L55 35 L70 30 L62 48 L75 58 L58 60 L50 78 L42 60 L25 58 L38 48 L30 30 L45 35 Z" fill="url(#goldGrad)" opacity="0.9"/>
+                        <circle cx="50" cy="50" r="4" fill="#FFFFFF"/>
+                        <defs>
+                            <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#FDF0CD"/>
+                                <stop offset="50%" stop-color="#D4AF37"/>
+                                <stop offset="100%" stop-color="#AA7A1E"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+                <div class="logo-text">
+                    <span class="brand-name">CHRONOS</span>
+                    <span class="brand-sub">ÉLITE GENÈVE</span>
+                </div>
+            </a>
+
+            <nav class="nav-menu">
+                <ul class="nav-list">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="index.html#collections" class="nav-link">Collections</a></li>
+                    <li><a href="cart.html" class="nav-link active">Cart & Checkout</a></li>
+                    <li><a href="order-confirmation.html" class="nav-link">My Order Receipt</a></li>
+                    <li><a href="javascript:void(0)" onclick="openAddProductModal()" class="nav-link" style="color: #D4AF37;"><i class="fa-solid fa-plus-circle"></i> Add Watch</a></li>
+                </ul>
+            </nav>
+
+            <div class="nav-actions">
+                <a href="cart.html" class="nav-icon-btn active" title="Cart">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span class="badge cart-count-badge">0</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- CART & CHECKOUT PAGE CONTENT -->
+    <main class="cart-page-section">
+        <div class="section-container">
+            
+            <div style="margin-bottom: 30px;">
+                <span class="section-subtitle">YOUR ACQUISITIONS</span>
+                <h1 style="font-size: 2.4rem; color: #FFF;">LUXURY VAULT & CHECKOUT</h1>
+            </div>
+
+            <div class="cart-page-grid" id="cartContentArea">
+                
+                <!-- Left: Cart Items & Client Form -->
+                <div>
+                    <!-- Cart Table Box -->
+                    <div class="cart-card-box">
+                        <div class="cart-card-header">
+                            <h2>Selected Timepieces (<span id="cartTotalItemsCount">0</span>)</h2>
+                            <button class="btn btn-outline btn-sm" onclick="clearCart()"><i class="fa-solid fa-trash"></i> Empty Vault</button>
+                        </div>
+
+                        <div id="cartTableWrapper">
+                            <!-- Injected by JS -->
+                        </div>
+                    </div>
+
+                    <!-- Client Checkout Details Box -->
+                    <div class="cart-card-box" style="margin-top: 30px;" id="checkoutBoxContainer">
+                        <div class="cart-card-header">
+                            <h2>1. Delivery & Recipient Information</h2>
+                        </div>
+
+                        <form id="pageCheckoutForm" onsubmit="handlePageOrderSubmit(event)">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Client Full Name *</label>
+                                    <input type="text" id="pCustName" placeholder="e.g. Marcus Vance / Ahmed Khan" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>WhatsApp / Phone Number *</label>
+                                    <input type="tel" id="pCustPhone" placeholder="e.g. +92 300 1234567" required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Email Address *</label>
+                                    <input type="email" id="pCustEmail" placeholder="client@example.com" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>City & Country *</label>
+                                    <input type="text" id="pCustCity" placeholder="Lahore, Pakistan / London, UK" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Complete Destination Address *</label>
+                                <textarea id="pCustAddress" rows="2" placeholder="House/Apartment #, Street, Area, Postal Code" required></textarea>
+                            </div>
+
+                            <h3 style="font-size: 1.1rem; color: var(--gold-light); margin: 24px 0 14px;">2. Payment Method</h3>
+                            <div class="payment-options">
+                                <label class="payment-radio">
+                                    <input type="radio" name="pagePaymentMethod" value="Cash on Delivery (COD)" checked>
+                                    <span class="radio-box">
+                                        <i class="fa-solid fa-hand-holding-dollar"></i>
+                                        <div>
+                                            <strong>Cash on Delivery (COD)</strong>
+                                            <small>Pay safely upon receiving your packaged timepiece at your doorstep</small>
+                                        </div>
+                                    </span>
+                                </label>
+                                <label class="payment-radio">
+                                    <input type="radio" name="pagePaymentMethod" value="Credit / Debit Card">
+                                    <span class="radio-box">
+                                        <i class="fa-solid fa-credit-card"></i>
+                                        <div>
+                                            <strong>Credit / Debit Card (Visa, MasterCard, Amex)</strong>
+                                            <small>Encrypted 256-Bit SSL payment processing</small>
+                                        </div>
+                                    </span>
+                                </label>
+                                <label class="payment-radio">
+                                    <input type="radio" name="pagePaymentMethod" value="Direct Bank Wire Transfer">
+                                    <span class="radio-box">
+                                        <i class="fa-solid fa-building-columns"></i>
+                                        <div>
+                                            <strong>Direct Bank Wire Transfer</strong>
+                                            <small>Official company IBAN details generated on receipt invoice</small>
+                                        </div>
+                                    </span>
+                                </label>
+                            </div>
+
+                            <div class="form-group" style="margin-top: 14px;">
+                                <label>Special Instructions / Custom Caseback Engraving (Optional)</label>
+                                <input type="text" id="pCustNotes" placeholder="e.g. Free gift packaging or custom engraved initials">
+                            </div>
+
+                            <button type="submit" class="btn btn-primary btn-block btn-lg" style="margin-top: 20px;">
+                                <i class="fa-solid fa-lock"></i> Place Order & Generate Invoice
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Right: Summary Sidebar -->
+                <div class="cart-summary-card">
+                    <h3 style="font-size: 1.25rem; color: #FFF; margin-bottom: 20px;">Order Summary</h3>
+                    
+                    <!-- Coupon Box -->
+                    <div class="coupon-section">
+                        <label style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 6px; display: block;">Have a Privilege Voucher?</label>
+                        <div class="coupon-input-group">
+                            <input type="text" id="pageCouponInput" placeholder="Enter ROYAL20">
+                            <button class="btn-sm" onclick="handlePageApplyCoupon()">Apply</button>
+                        </div>
+                        <div id="pageCouponFeedback" class="coupon-feedback"></div>
+                    </div>
+
+                    <div class="cart-totals">
+                        <div class="total-row">
+                            <span>Subtotal:</span>
+                            <span id="pageSubtotal">$0.00</span>
+                        </div>
+                        <div class="total-row discount-row" id="pageDiscountRow" style="display: none;">
+                            <span>Privilege Discount (20%):</span>
+                            <span id="pageDiscount">-$0.00</span>
+                        </div>
+                        <div class="total-row">
+                            <span>Insured Armored Delivery:</span>
+                            <span class="free-shipping">COMPLIMENTARY</span>
+                        </div>
+                        <div class="total-row grand-total">
+                            <span>Total Due:</span>
+                            <span id="pageGrandTotal">$0.00</span>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 24px; display: flex; flex-direction: column; gap: 12px;">
+                        <button class="btn btn-whatsapp btn-block" onclick="handlePageWhatsAppOrder()">
+                            <i class="fa-brands fa-whatsapp"></i> Order Cart via WhatsApp
+                        </button>
+                        <a href="index.html#collections" class="btn btn-outline btn-block">
+                            <i class="fa-solid fa-plus"></i> Add More Watches
+                        </a>
+                    </div>
+
+                    <div class="checkout-guarantee" style="margin-top: 24px;">
+                        <i class="fa-solid fa-shield-halved" style="font-size: 1.4rem;"></i>
+                        <p>5-Year International Movement Warranty, Authenticity Certificate, & 30-Day Return Guarantee included.</p>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="main-footer">
+        <div class="footer-bottom">
+            <div class="footer-bottom-container">
+                <p>&copy; 2026 CHRONOS ÉLITE GENÈVE. All Rights Reserved.</p>
+                <div class="footer-legal">
+                    <a href="index.html">Home</a>
+                    <span>•</span>
+                    <a href="cart.html">Cart</a>
+                    <span>•</span>
+                    <a href="order-confirmation.html">Receipts</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- SHARED JS CORE -->
+    <script src="shared.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            renderCartPage();
+
+            window.addEventListener("cartUpdated", renderCartPage);
+            window.addEventListener("currencyChanged", renderCartPage);
+        });
+
+        function renderCartPage() {
+            const tableWrapper = document.getElementById("cartTableWrapper");
+            const checkoutBox = document.getElementById("checkoutBoxContainer");
+            const items = loadCart();
+
+            document.getElementById("cartTotalItemsCount").textContent = items.reduce((s, i) => s + i.quantity, 0);
+
+            if (items.length === 0) {
+                tableWrapper.innerHTML = `
+                    <div style="text-align: center; padding: 60px 20px; color: #747A88;">
+                        <i class="fa-solid fa-clock-rotate-left" style="font-size: 3rem; color: #D4AF37; margin-bottom: 16px; display: block;"></i>
+                        <h3 style="color: #FFF; margin-bottom: 8px;">Your Vault is Currently Empty</h3>
+                        <p>Discover our signature chronographs, divers, and skeleton tourbillons to begin.</p>
+                        <a href="index.html#collections" class="btn btn-primary" style="margin-top: 20px;">Browse Timepieces</a>
+                    </div>
+                `;
+                if (checkoutBox) checkoutBox.style.display = "none";
+                updateSummaryPrices(0, 0, 0);
+                return;
+            }
+
+            if (checkoutBox) checkoutBox.style.display = "block";
+
+            tableWrapper.innerHTML = `
+                <table class="cart-page-table">
+                    <thead>
+                        <tr>
+                            <th>Watch Model</th>
+                            <th>Unit Price</th>
+                            <th style="text-align: center;">Quantity</th>
+                            <th style="text-align: right;">Total</th>
+                            <th style="text-align: center;">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${items.map(item => `
+                            <tr>
+                                <td>
+                                    <div class="item-flex">
+                                        <img src="${item.image}" alt="${item.title}" class="item-thumb">
+                                        <div>
+                                            <div class="item-name">${item.title}</div>
+                                            <div class="item-variant">${item.meta}</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="price-col">${formatPrice(item.priceUSD)}</td>
+                                <td style="text-align: center;">
+                                    <div class="cart-qty-ctrl" style="display: inline-flex;">
+                                        <button onclick="updateCartQty('${item.id}', -1)"><i class="fa-solid fa-minus"></i></button>
+                                        <span>${item.quantity}</span>
+                                        <button onclick="updateCartQty('${item.id}', 1)"><i class="fa-solid fa-plus"></i></button>
+                                    </div>
+                                </td>
+                                <td class="price-col" style="text-align: right;">${formatPrice(item.priceUSD * item.quantity)}</td>
+                                <td style="text-align: center;">
+                                    <button class="cart-item-remove" onclick="removeCartItem('${item.id}')" title="Remove"><i class="fa-solid fa-trash-can"></i></button>
+                                </td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            `;
+
+            const totals = calculateCartTotals();
+            updateSummaryPrices(totals.subtotalUSD, totals.discountUSD, totals.totalUSD);
+        }
+
+        function updateSummaryPrices(subtotal, discount, total) {
+            document.getElementById("pageSubtotal").textContent = formatPrice(subtotal);
+            const discountRow = document.getElementById("pageDiscountRow");
+            if (discount > 0) {
+                discountRow.style.display = "flex";
+                document.getElementById("pageDiscount").textContent = `-${formatPrice(discount)}`;
+            } else {
+                discountRow.style.display = "none";
+            }
+            document.getElementById("pageGrandTotal").textContent = formatPrice(total);
+        }
+
+        function handlePageApplyCoupon() {
+            const input = document.getElementById("pageCouponInput");
+            const feedback = document.getElementById("pageCouponFeedback");
+            const res = applyCoupon(input.value);
+
+            if (res.success) {
+                feedback.className = "coupon-feedback success";
+                feedback.textContent = res.message;
+            } else {
+                feedback.className = "coupon-feedback error";
+                feedback.textContent = res.message;
+            }
+        }
+
+        function handlePageOrderSubmit(e) {
+            e.preventDefault();
+            const items = loadCart();
+            if (items.length === 0) {
+                showToast("Your cart is empty!");
+                return;
+            }
+
+            const name = document.getElementById("pCustName").value.trim();
+            const phone = document.getElementById("pCustPhone").value.trim();
+            const email = document.getElementById("pCustEmail").value.trim();
+            const city = document.getElementById("pCustCity").value.trim();
+            const address = document.getElementById("pCustAddress").value.trim();
+            const payment = document.querySelector('input[name="pagePaymentMethod"]:checked').value;
+            const notes = document.getElementById("pCustNotes").value.trim();
+
+            const totals = calculateCartTotals();
+            const orderNumber = `CH-${Math.floor(10000 + Math.random() * 90000)}`;
+
+            const orderData = {
+                orderNumber,
+                date: new Date().toLocaleDateString("en-US", { year: 'numeric', month: 'long', day: 'numeric' }),
+                customer: { name, phone, email, city, address, notes },
+                items: [...items],
+                paymentMethod: payment,
+                currency: currentCurrency,
+                subtotal: totals.subtotalUSD,
+                discount: totals.discountUSD,
+                total: totals.totalUSD
+            };
+
+            // Save order to localStorage
+            localStorage.setItem("chronos_last_order", JSON.stringify(orderData));
+
+            // Clear Cart
+            clearCart();
+
+            // Redirect to Order Confirmation page
+            window.location.href = "order-confirmation.html";
+        }
+
+        function handlePageWhatsAppOrder() {
+            const items = loadCart();
+            if (items.length === 0) {
+                showToast("Your vault is empty!");
+                return;
+            }
+            const totals = calculateCartTotals();
+            let itemsSummary = items.map((i, idx) => `${idx + 1}. *${i.title}* (${i.meta}) x${i.quantity} = ${formatPrice(i.priceUSD * i.quantity)}`).join('%0A');
+
+            const msg = `Hello Chronos Élite Concierge,%0A%0AI would like to place an order from my Cart Vault:%0A%0A${itemsSummary}%0A%0A*Total Amount Due:* ${formatPrice(totals.totalUSD)}%0A*Shipping:* Insured Express Complimentary%0A%0APlease connect me with a representative to finalize this acquisition.`;
+            window.open(`https://wa.me/${WHATSAPP_PHONE}?text=${msg}`, "_blank");
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CHRONOS ÉLITE | Haute Horlogerie & Luxury Timepieces</title>
+    <meta name="description" content="Handcrafted Swiss luxury watches, chronographs, and skeleton tourbillons. Experience living mechanical watch movements and bespoke horology.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- TOP ANNOUNCEMENT BAR -->
+    <div class="top-bar">
+        <div class="top-bar-container">
+            <div class="top-message">
+                <i class="fa-solid fa-crown"></i>
+                <span>Complimentary Insured Worldwide Delivery | 5-Year Global Movement Guarantee</span>
+            </div>
+            <div class="top-actions">
+                <div class="currency-selector">
+                    <label for="currencySelect"><i class="fa-solid fa-globe"></i></label>
+                    <select id="currencySelect" class="currency-select" onchange="setCurrency(this.value)">
+                        <option value="USD">USD ($)</option>
+                        <option value="EUR">EUR (€)</option>
+                        <option value="GBP">GBP (£)</option>
+                        <option value="PKR">PKR (₨)</option>
+                    </select>
+                </div>
+                <div class="top-support">
+                    <i class="fa-brands fa-whatsapp"></i>
+                    <a href="https://wa.me/923001234567" target="_blank">Concierge Helpline: +92 300 1234567</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN HEADER NAVIGATION -->
+    <header class="main-header" id="navbar">
+        <div class="header-container">
+            <!-- Mobile Toggle -->
+            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle Navigation">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+
+            <!-- Brand Logo -->
+            <a href="index.html" class="brand-logo">
+                <div class="logo-emblem">
+                    <svg viewBox="0 0 100 100" class="crown-svg">
+                        <circle cx="50" cy="50" r="46" stroke="url(#goldGrad)" stroke-width="2.5" fill="none"/>
+                        <circle cx="50" cy="50" r="41" stroke="#D4AF37" stroke-width="0.75" stroke-dasharray="3,3" fill="none"/>
+                        <path d="M50 18 L55 35 L70 30 L62 48 L75 58 L58 60 L50 78 L42 60 L25 58 L38 48 L30 30 L45 35 Z" fill="url(#goldGrad)" opacity="0.9"/>
+                        <circle cx="50" cy="50" r="4" fill="#FFFFFF"/>
+                        <defs>
+                            <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#FDF0CD"/>
+                                <stop offset="50%" stop-color="#D4AF37"/>
+                                <stop offset="100%" stop-color="#AA7A1E"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+                <div class="logo-text">
+                    <span class="brand-name">CHRONOS</span>
+                    <span class="brand-sub">ÉLITE GENÈVE</span>
+                </div>
+            </a>
+
+            <!-- Navigation Links (Multi-Page Architecture) -->
+            <nav class="nav-menu" id="navMenu">
+                <ul class="nav-list">
+                    <li><a href="index.html" class="nav-link active">Home</a></li>
+                    <li><a href="#collections" class="nav-link">Collections</a></li>
+                    <li><a href="product-detail.html?id=1" class="nav-link">Product Detail</a></li>
+                    <li><a href="cart.html" class="nav-link">Cart & Checkout</a></li>
+                    <li><a href="order-confirmation.html" class="nav-link">My Order Receipt</a></li>
+                    <li><a href="javascript:void(0)" onclick="openAddProductModal()" class="nav-link" style="color: #D4AF37;"><i class="fa-solid fa-plus-circle"></i> Add Watch</a></li>
+                </ul>
+            </nav>
+
+            <!-- Nav Utilities (Search, Wishlist, Cart Drawer/Page) -->
+            <div class="nav-actions">
+                <button class="nav-icon-btn" id="searchBtn" title="Search Timepieces" aria-label="Search">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+                <button class="nav-icon-btn" id="wishlistBtn" title="Wishlist" aria-label="Wishlist">
+                    <i class="fa-regular fa-heart"></i>
+                    <span class="badge wishlist-count-badge" id="wishlistCount">0</span>
+                </button>
+                <a href="cart.html" class="nav-icon-btn" title="Shopping Cart">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span class="badge cart-count-badge" id="cartCount">0</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO CAROUSEL BANNER WITH LIVE WATCH MECHANISM & MOVEMENT -->
+    <section class="hero-section" id="home">
+        
+        <!-- Live Calibre Beating HUD in Banner -->
+        <div class="live-calibre-hud">
+            <div class="beating-heart-orb">
+                <div class="heart-pulse-ring"></div>
+                <svg viewBox="0 0 24 24" class="mini-balance-wheel">
+                    <circle cx="12" cy="12" r="9" stroke="#D4AF37" stroke-width="1.8" fill="none"/>
+                    <line x1="12" y1="3" x2="12" y2="21" stroke="#D4AF37" stroke-width="1.8"/>
+                    <line x1="3" y1="12" x2="21" y2="12" stroke="#D4AF37" stroke-width="1.8"/>
+                    <circle cx="12" cy="12" r="2.5" fill="#FFF"/>
+                </svg>
+            </div>
+            <div class="hud-info">
+                <h5><span class="live-tag">LIVE CALIBRE</span> Calibre CH-900</h5>
+                <p>28,800 VPH (4Hz) • 33 Jewels • Beating Mechanical Heart</p>
+            </div>
+        </div>
+
+        <!-- Floating Living Mechanical Gear Engine Overlay -->
+        <div class="gear-engine-overlay">
+            <!-- Main Golden Chrono Wheel -->
+            <svg viewBox="0 0 100 100" class="gear-main">
+                <circle cx="50" cy="50" r="40" stroke="#D4AF37" stroke-width="2" fill="none" stroke-dasharray="4,2"/>
+                <circle cx="50" cy="50" r="28" stroke="#F7E5A9" stroke-width="1" fill="none"/>
+                <circle cx="50" cy="50" r="10" fill="#AA7A1E"/>
+                <line x1="50" y1="10" x2="50" y2="90" stroke="#D4AF37" stroke-width="1.5"/>
+                <line x1="10" y1="50" x2="90" y2="50" stroke="#D4AF37" stroke-width="1.5"/>
+                <line x1="22" y1="22" x2="78" y2="78" stroke="#D4AF37" stroke-width="1.5"/>
+                <line x1="22" y1="78" x2="78" y2="22" stroke="#D4AF37" stroke-width="1.5"/>
+            </svg>
+            <!-- Secondary Escape Pinion -->
+            <svg viewBox="0 0 100 100" class="gear-secondary">
+                <circle cx="50" cy="50" r="38" stroke="#00D2FF" stroke-width="2" fill="none" stroke-dasharray="3,3"/>
+                <circle cx="50" cy="50" r="15" fill="#0077B6" opacity="0.6"/>
+                <line x1="50" y1="12" x2="50" y2="88" stroke="#00D2FF" stroke-width="2"/>
+                <line x1="12" y1="50" x2="88" y2="50" stroke="#00D2FF" stroke-width="2"/>
+            </svg>
+        </div>
+
+        <div class="carousel-container" id="heroCarousel">
+            
+            <!-- Slide 1: The Sovereign Chronograph -->
+            <div class="carousel-slide active" data-index="0">
+                <div class="slide-bg" style="background-image: url('assets/images/banner-gold.jpg');"></div>
+                <div class="slide-overlay"></div>
+                <div class="crystal-shimmer"></div>
+                <div class="slide-content">
+                    <div class="badge-pill">
+                        <i class="fa-solid fa-sparkles"></i> 2026 FLAGSHIP MASTERPIECE
+                    </div>
+                    <h1 class="slide-title">THE SOVEREIGN<br><span class="gold-gradient">CHRONOGRAPH</span></h1>
+                    <p class="slide-description">
+                        Forged in 18K Swiss gold and obsidian high-tech ceramic. Powered by the in-house Calibre CH-900 automatic movement with a 72-hour power reserve.
+                    </p>
+                    <div class="slide-specs">
+                        <div class="spec-item"><span class="spec-label">Calibre:</span> CH-900 Auto</div>
+                        <div class="spec-item"><span class="spec-label">Case:</span> 18K Solid Gold</div>
+                        <div class="spec-item"><span class="spec-label">Glass:</span> Double AR Sapphire</div>
+                    </div>
+                    <div class="slide-buttons">
+                        <a href="product-detail.html?id=1" class="btn btn-primary">
+                            <span>Inspect Timepiece</span>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                        <button class="btn btn-outline" onclick="openWatchExplodedView(1)">
+                            <i class="fa-solid fa-screwdriver-wrench"></i> Open Watch Case
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 2: Neptune Deep Sea Diver -->
+            <div class="carousel-slide" data-index="1">
+                <div class="slide-bg" style="background-image: url('assets/images/banner-diver.jpg');"></div>
+                <div class="slide-overlay"></div>
+                <div class="crystal-shimmer"></div>
+                <div class="slide-content">
+                    <div class="badge-pill">
+                        <i class="fa-solid fa-water"></i> PROFESSIONAL DIVE SERIES
+                    </div>
+                    <h2 class="slide-title">NEPTUNE SUBMARINER<br><span class="cyan-gradient">DEEP SEA 300M</span></h2>
+                    <p class="slide-description">
+                        Built for ultimate marine depths. High-grade 316L brushed surgical steel, unidirectional ceramic bezel, and Super-LumiNova cyan luminous markers.
+                    </p>
+                    <div class="slide-specs">
+                        <div class="spec-item"><span class="spec-label">Resistance:</span> 300M / 1000FT</div>
+                        <div class="spec-item"><span class="spec-label">Bezel:</span> Cerachrom 120-Click</div>
+                        <div class="spec-item"><span class="spec-label">Lume:</span> BGW9 Cyan</div>
+                    </div>
+                    <div class="slide-buttons">
+                        <a href="product-detail.html?id=2" class="btn btn-primary btn-blue">
+                            <span>Shop Diver Series</span>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                        <button class="btn btn-outline" onclick="openWatchExplodedView(2)">
+                            <i class="fa-solid fa-screwdriver-wrench"></i> Open Watch Case
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 3: Skeleton Tourbillon -->
+            <div class="carousel-slide" data-index="2">
+                <div class="slide-bg" style="background-image: url('assets/images/banner-skeleton.jpg');"></div>
+                <div class="slide-overlay"></div>
+                <div class="crystal-shimmer"></div>
+                <div class="slide-content">
+                    <div class="badge-pill">
+                        <i class="fa-solid fa-gear"></i> LIMITED EDITION: 500 PIECES
+                    </div>
+                    <h2 class="slide-title">L'INFINI TOURBILLON<br><span class="rose-gradient">SKELETON AUTOMATIC</span></h2>
+                    <p class="slide-description">
+                        The pinnacle of mechanical horology. Fully skeletonized dial revealing every microscopic titanium gear, ruby jewel, and flying tourbillon cage.
+                    </p>
+                    <div class="slide-specs">
+                        <div class="spec-item"><span class="spec-label">Movement:</span> Flying Tourbillon</div>
+                        <div class="spec-item"><span class="spec-label">Jewels:</span> 33 Synthetic Rubies</div>
+                        <div class="spec-item"><span class="spec-label">Strap:</span> Carbon Hybrid Leather</div>
+                    </div>
+                    <div class="slide-buttons">
+                        <a href="product-detail.html?id=7" class="btn btn-primary btn-rose">
+                            <span>Pre-Order Tourbillon</span>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                        <button class="btn btn-outline" onclick="openWatchExplodedView(7)">
+                            <i class="fa-solid fa-screwdriver-wrench"></i> Open Watch Case
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Carousel Navigation Controls -->
+        <button class="carousel-control prev" id="prevSlide" aria-label="Previous Slide">
+            <i class="fa-solid fa-chevron-left"></i>
+        </button>
+        <button class="carousel-control next" id="nextSlide" aria-label="Next Slide">
+            <i class="fa-solid fa-chevron-right"></i>
+        </button>
+
+        <!-- Carousel Indicators -->
+        <div class="carousel-indicators" id="carouselDots">
+            <button class="indicator active" data-slide="0" aria-label="Slide 1"></button>
+            <button class="indicator" data-slide="1" aria-label="Slide 2"></button>
+            <button class="indicator" data-slide="2" aria-label="Slide 3"></button>
+        </div>
+
+        <!-- Progress Bar for Autoplay -->
+        <div class="carousel-progress-bar">
+            <div class="progress-fill" id="slideProgress"></div>
+        </div>
+    </section>
+
+    <!-- TRUST PILLARS BAR -->
+    <section class="trust-bar">
+        <div class="trust-container">
+            <div class="trust-item">
+                <div class="trust-icon"><i class="fa-solid fa-award"></i></div>
+                <div class="trust-text">
+                    <h4>Swiss Made Standards</h4>
+                    <p>500-hour chronometer precision certification</p>
+                </div>
+            </div>
+            <div class="trust-item">
+                <div class="trust-icon"><i class="fa-solid fa-gem"></i></div>
+                <div class="trust-text">
+                    <h4>Anti-Reflective Sapphire</h4>
+                    <p>Scratchproof double-domed crystal glass</p>
+                </div>
+            </div>
+            <div class="trust-item">
+                <div class="trust-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                <div class="trust-text">
+                    <h4>5-Year Global Warranty</h4>
+                    <p>International coverage & free movement service</p>
+                </div>
+            </div>
+            <div class="trust-item">
+                <div class="trust-icon"><i class="fa-solid fa-truck-fast"></i></div>
+                <div class="trust-text">
+                    <h4>Insured Global Express</h4>
+                    <p>Handled with tamper-proof luxury vault packing</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SPECIAL FLASH SALE & LIVE COUNTDOWN BANNER -->
+    <section class="promo-banner-section" id="special-offer">
+        <div class="promo-banner-container">
+            <div class="promo-card">
+                <div class="promo-content">
+                    <span class="promo-tag"><i class="fa-solid fa-fire"></i> EXCLUSIVE COLLECTOR'S FLASH SALE</span>
+                    <h2 class="promo-heading">ANNIVERSARY EDITIONS — <span class="gold-gradient">UP TO 20% OFF</span></h2>
+                    <p class="promo-sub">Use coupon code <strong class="coupon-code" id="couponCode">ROYAL20</strong> at checkout for instant luxury discount.</p>
+                    
+                    <!-- Live Ticking Countdown -->
+                    <div class="countdown-timer" id="countdownTimer">
+                        <div class="timer-box">
+                            <span class="timer-num" id="hours">08</span>
+                            <span class="timer-lbl">Hours</span>
+                        </div>
+                        <span class="timer-divider">:</span>
+                        <div class="timer-box">
+                            <span class="timer-num" id="minutes">42</span>
+                            <span class="timer-lbl">Mins</span>
+                        </div>
+                        <span class="timer-divider">:</span>
+                        <div class="timer-box">
+                            <span class="timer-num" id="seconds">19</span>
+                            <span class="timer-lbl">Secs</span>
+                        </div>
+                    </div>
+
+                    <div class="promo-actions">
+                        <button class="btn btn-primary" onclick="copyCouponCode()">
+                            <i class="fa-solid fa-copy"></i> Copy Code: ROYAL20
+                        </button>
+                        <a href="#collections" class="btn btn-outline">Claim Discount</a>
+                    </div>
+                </div>
+                <div class="promo-visual">
+                    <div class="promo-badge-float">
+                        <span class="big-percent">20%</span>
+                        <span class="save-text">OFF VIP</span>
+                    </div>
+                    <img src="assets/images/banner-gold.jpg" alt="Luxury Gold Chronograph" class="promo-img">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TIMEPIECE COLLECTIONS CATALOG -->
+    <section class="collections-section" id="collections">
+        <div class="section-container">
+            
+            <div class="section-header">
+                <span class="section-subtitle">THE ATELIER CATALOG</span>
+                <h2 class="section-title">SIGNATURE TIMEPIECE COLLECTIONS</h2>
+                <div class="title-separator">
+                    <span class="line"></span>
+                    <i class="fa-solid fa-gem"></i>
+                    <span class="line"></span>
+                </div>
+                <p class="section-desc">Each timepiece is hand-assembled in our Genevan workshops, combining classical watchmaking mastery with state-of-the-art metallurgical engineering.</p>
+                <div style="margin-top: 16px;">
+                    <button class="btn btn-primary btn-sm" onclick="openAddProductModal()">
+                        <i class="fa-solid fa-plus-circle"></i> Add New Watch to Store
+                    </button>
+                </div>
+            </div>
+
+            <!-- Controls: Category Tabs & Live Search -->
+            <div class="catalog-controls">
+                <div class="filter-tabs" id="filterTabs">
+                    <button class="filter-btn active" data-category="all">All Watches</button>
+                    <button class="filter-btn" data-category="chronograph">Chronographs</button>
+                    <button class="filter-btn" data-category="diver">Dive Masters</button>
+                    <button class="filter-btn" data-category="skeleton">Skeleton Tourbillon</button>
+                    <button class="filter-btn" data-category="classic">Classic Dress</button>
+                </div>
+                <div class="catalog-actions">
+                    <div class="search-input-wrapper">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="text" id="liveSearchInput" placeholder="Search by name, spec..." oninput="handleCatalogLiveSearch(this.value)">
+                    </div>
+                    <select id="sortSelect" onchange="handleCatalogSort(this.value)" class="sort-select">
+                        <option value="featured">Sort By: Featured</option>
+                        <option value="price-asc">Price: Low to High</option>
+                        <option value="price-desc">Price: High to Low</option>
+                        <option value="rating">Highest Rated</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Product Grid -->
+            <div class="product-grid" id="productGrid">
+                <!-- Dynamically populated from shared.js -->
+            </div>
+
+        </div>
+    </section>
+
+    <!-- INTERACTIVE 3D WATCH OPEN / CASE EXPLODED VIEW MODAL -->
+    <div class="modal-overlay" id="watchExplodedModal">
+        <div class="modal-card" style="max-width: 820px; padding: 40px; text-align: center;">
+            <button class="modal-close" onclick="closeWatchExplodedView()"><i class="fa-solid fa-xmark"></i></button>
+            <span class="section-subtitle"><i class="fa-solid fa-microchip"></i> 3D HOROLOGICAL ARCHITECTURE</span>
+            <h2 style="font-size: 1.8rem; color: #FFF; margin: 4px 0 10px;" id="explodedModalTitle">THE SOVEREIGN CHRONO — MECHANICAL HEART</h2>
+            <p style="font-size: 0.88rem; color: var(--text-secondary); max-width: 600px; margin: 0 auto 20px;">
+                Watch opening mechanism simulated: Observe the multi-layer separation of the double-domed sapphire crystal, 120-click ceramic bezel, hand-assembled calibre, and forged alloy case.
+            </p>
+
+            <div class="watch-open-stage exploded" id="watchOpenStage">
+                <img src="assets/images/banner-gold.jpg" id="explodedLayerImg" class="watch-layer watch-layer-movement" style="width: 280px; height: 280px; object-fit: cover; border-radius: 50%; border: 3px solid #D4AF37;">
+                <!-- Bezel Layer Ring -->
+                <div class="watch-layer watch-layer-bezel" style="width: 320px; height: 320px; border-radius: 50%; border: 6px dashed #AA7A1E; pointer-events: none;"></div>
+                <!-- Sapphire Crystal Layer with glint -->
+                <div class="watch-layer watch-layer-sapphire" style="width: 310px; height: 310px; border-radius: 50%; background: radial-gradient(circle, rgba(0, 210, 255, 0.2) 0%, rgba(255,255,255,0.05) 70%); border: 2px solid rgba(255,255,255,0.4); pointer-events: none;">
+                    <div class="crystal-shimmer"></div>
+                </div>
+            </div>
+
+            <div style="display: flex; gap: 14px; justify-content: center; margin-top: 20px; flex-wrap: wrap;">
+                <button class="btn btn-primary" id="explodedDetailBtn">
+                    <i class="fa-solid fa-arrow-right"></i> Open Full Product Page
+                </button>
+                <button class="btn btn-outline" onclick="toggleCaseExplode()">
+                    <i class="fa-solid fa-rotate"></i> Toggle Case Split / Close
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- QUICK VIEW MODAL -->
+    <div class="modal-overlay" id="quickViewModal">
+        <div class="modal-card">
+            <button class="modal-close" onclick="closeQuickView()"><i class="fa-solid fa-xmark"></i></button>
+            <div class="quick-view-grid">
+                <div class="quick-view-gallery">
+                    <img src="" id="qvImage" alt="Watch Preview" class="qv-main-img">
+                    <div class="qv-badge-wrapper" id="qvBadges"></div>
+                </div>
+                <div class="quick-view-info">
+                    <span class="qv-category" id="qvCategory">Chronograph</span>
+                    <h2 class="qv-title" id="qvTitle">Watch Title</h2>
+                    <div class="qv-rating">
+                        <div class="stars" id="qvStars">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <span class="rating-text" id="qvReviewCount">(48 Reviews)</span>
+                    </div>
+                    <div class="qv-price" id="qvPrice">$0.00</div>
+                    <p class="qv-description" id="qvDescription">Description here.</p>
+
+                    <div class="qv-specs-grid">
+                        <div class="qv-spec-item">
+                            <i class="fa-solid fa-gear"></i>
+                            <div>
+                                <small>Movement</small>
+                                <strong id="qvMovement">Swiss Automatic</strong>
+                            </div>
+                        </div>
+                        <div class="qv-spec-item">
+                            <i class="fa-solid fa-water"></i>
+                            <div>
+                                <small>Water Resistance</small>
+                                <strong id="qvWater">100M / 10 BAR</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="qv-quantity-actions" style="margin-top: 20px;">
+                        <a href="#" id="qvFullDetailLink" class="btn btn-outline">
+                            Full Details Page
+                        </a>
+                        <button class="btn btn-primary" onclick="addQvToCartDirect()">
+                            <i class="fa-solid fa-bag-shopping"></i> Add to Cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SEARCH OVERLAY MODAL -->
+    <div class="modal-overlay" id="searchOverlay">
+        <div class="search-modal-box">
+            <div class="search-header">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" id="globalSearchInput" placeholder="Search luxury timepieces by model, calibre, dial..." autofocus oninput="handleGlobalSearchInput(this.value)">
+                <button class="close-search-btn" onclick="closeSearch()"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="search-results-list" id="searchResultsList">
+                <p class="search-hint">Type above to instantly discover watches in our collection...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- FLOATING WHATSAPP BUTTON FOR CLIENT DELIVERY -->
+    <a href="https://wa.me/923001234567?text=Hello%20Chronos%20Elite,%20I%20am%20interested%20in%20purchasing%20a%20luxury%20watch." target="_blank" class="floating-whatsapp" title="Chat with Concierge" aria-label="WhatsApp Concierge">
+        <i class="fa-brands fa-whatsapp"></i>
+        <span class="whatsapp-tooltip">Chat with Concierge</span>
+    </a>
+
+    <!-- FOOTER -->
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-col brand-col">
+                <div class="footer-logo">
+                    <span class="brand-name">CHRONOS</span>
+                    <span class="brand-sub">ÉLITE GENÈVE</span>
+                </div>
+                <p class="footer-text">
+                    Purveyors of exceptional horological instruments since 1894. Hand-assembled in Switzerland with lifetime mechanical movement commitment.
+                </p>
+                <div class="footer-socials">
+                    <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="https://wa.me/923001234567" target="_blank" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h4>Navigation Pages</h4>
+                <ul class="footer-links">
+                    <li><a href="index.html">Atelier Homepage</a></li>
+                    <li><a href="product-detail.html?id=1">Product Detail Showcase</a></li>
+                    <li><a href="cart.html">Shopping Vault & Cart</a></li>
+                    <li><a href="order-confirmation.html">Order Confirmation Slip</a></li>
+                    <li><a href="javascript:void(0)" onclick="openAddProductModal()">+ Add New Product</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Concierge Service</h4>
+                <ul class="footer-links">
+                    <li><a href="cart.html">Track Order</a></li>
+                    <li><a href="https://wa.me/923001234567" target="_blank">WhatsApp Direct Purchase</a></li>
+                    <li><a href="#special-offer">Flash Sale Voucher (ROYAL20)</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Atelier Contact</h4>
+                <div class="contact-entry">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <span>Rue du Rhône 42, 1204 Genève, Switzerland</span>
+                </div>
+                <div class="contact-entry">
+                    <i class="fa-solid fa-phone"></i>
+                    <span>+92 300 1234567 / +41 22 819 9000</span>
+                </div>
+                <div class="payment-badges">
+                    <i class="fa-brands fa-cc-visa"></i>
+                    <i class="fa-brands fa-cc-mastercard"></i>
+                    <i class="fa-solid fa-money-bill-transfer"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="footer-bottom-container">
+                <p>&copy; 2026 CHRONOS ÉLITE GENÈVE. All Rights Reserved. Built for client delivery.</p>
+                <div class="footer-legal">
+                    <a href="index.html">Home</a>
+                    <span>•</span>
+                    <a href="product-detail.html?id=1">Product Detail</a>
+                    <span>•</span>
+                    <a href="cart.html">Cart</a>
+                    <span>•</span>
+                    <a href="order-confirmation.html">Receipts</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- SHARED JS CORE ARCHITECTURE -->
+    <script src="shared.js"></script>
+
+    <!-- HOMEPAGE SCRIPT -->
+    <script>
+        let currentFilter = "all";
+        let activeQvItem = null;
+
+        document.addEventListener("DOMContentLoaded", () => {
+            initCarousel();
+            initCountdown();
+            renderCatalog();
+
+            window.addEventListener("currencyChanged", renderCatalog);
+            window.addEventListener("productsUpdated", renderCatalog);
+
+            // Search Triggers
+            document.getElementById("searchBtn").addEventListener("click", () => {
+                document.getElementById("searchOverlay").classList.add("active");
+                document.getElementById("globalSearchInput").focus();
+            });
+
+            // Mobile Menu
+            const mBtn = document.getElementById("mobileMenuBtn");
+            const nMenu = document.getElementById("navMenu");
+            if (mBtn && nMenu) {
+                mBtn.addEventListener("click", () => nMenu.classList.toggle("mobile-open"));
+            }
+        });
+
+        // ==================== CAROUSEL ====================
+        let slideIdx = 0;
+        let slideTimer = null;
+        function initCarousel() {
+            const slides = document.querySelectorAll(".carousel-slide");
+            const dots = document.querySelectorAll("#carouselDots .indicator");
+            const pFill = document.getElementById("slideProgress");
+            if (!slides.length) return;
+
+            function goTo(i) {
+                slides.forEach(s => s.classList.remove("active"));
+                dots.forEach(d => d.classList.remove("active"));
+                slideIdx = (i + slides.length) % slides.length;
+                slides[slideIdx].classList.add("active");
+                if (dots[slideIdx]) dots[slideIdx].classList.add("active");
+                if (pFill) {
+                    pFill.style.transition = 'none';
+                    pFill.style.width = '0%';
+                    setTimeout(() => {
+                        pFill.style.transition = 'width 6000ms linear';
+                        pFill.style.width = '100%';
+                    }, 40);
+                }
+            }
+
+            document.getElementById("nextSlide").onclick = () => { goTo(slideIdx + 1); startTimer(); };
+            document.getElementById("prevSlide").onclick = () => { goTo(slideIdx - 1); startTimer(); };
+            dots.forEach((d, idx) => d.onclick = () => { goTo(idx); startTimer(); });
+
+            function startTimer() {
+                clearInterval(slideTimer);
+                slideTimer = setInterval(() => goTo(slideIdx + 1), 6000);
+            }
+            goTo(0);
+            startTimer();
+        }
+
+        // ==================== COUNTDOWN ====================
+        function initCountdown() {
+            let sec = (8 * 3600) + (42 * 60) + 19;
+            setInterval(() => {
+                sec--;
+                if (sec <= 0) sec = 24 * 3600;
+                document.getElementById("hours").textContent = String(Math.floor(sec / 3600)).padStart(2, "0");
+                document.getElementById("minutes").textContent = String(Math.floor((sec % 3600) / 60)).padStart(2, "0");
+                document.getElementById("seconds").textContent = String(sec % 60).padStart(2, "0");
+            }, 1000);
+        }
+
+        function copyCouponCode() {
+            navigator.clipboard.writeText("ROYAL20").then(() => {
+                showToast("Coupon code 'ROYAL20' copied! 20% discount ready.");
+            });
+        }
+
+        // ==================== CATALOG RENDERING ====================
+        function renderCatalog(itemsToRender = null) {
+            const grid = document.getElementById("productGrid");
+            if (!grid) return;
+
+            let list = itemsToRender || getAllProducts();
+            if (currentFilter !== "all" && !itemsToRender) {
+                list = list.filter(p => p.category === currentFilter);
+            }
+
+            const wish = loadWishlist();
+
+            grid.innerHTML = list.map(p => `
+                <div class="product-card">
+                    <div class="product-thumb-wrapper">
+                        ${p.badges.map(b => `<span class="badge-tag ${b.class}">${b.text}</span>`).join('')}
+                        <button class="wishlist-btn ${wish.has(String(p.id)) ? 'active' : ''}" onclick="toggleWishlist('${p.id}', this)" title="Wishlist">
+                            <i class="${wish.has(String(p.id)) ? 'fa-solid' : 'fa-regular'} fa-heart"></i>
+                        </button>
+                        <a href="product-detail.html?id=${p.id}">
+                            <img src="${p.image}" alt="${p.title}" class="product-img" loading="lazy">
+                        </a>
+                        <button class="quick-view-overlay-btn" onclick="openHomeQuickView('${p.id}')">
+                            <i class="fa-solid fa-eye"></i> Quick View
+                        </button>
+                    </div>
+                    <div class="product-details">
+                        <div class="product-category-row">
+                            <span>${p.category.toUpperCase()}</span>
+                            <div class="product-rating">
+                                <i class="fa-solid fa-star"></i>
+                                <span>${p.rating} (${p.reviews})</span>
+                            </div>
+                        </div>
+                        <h3 class="product-title"><a href="product-detail.html?id=${p.id}">${p.title}</a></h3>
+                        <p class="product-specs-summary">${p.movement} • ${p.glass || 'Sapphire'}</p>
+                        <div class="product-footer-row">
+                            <div class="product-price-box">
+                                <span class="old-price">${formatPrice(p.oldPriceUSD || (p.priceUSD * 1.15))}</span>
+                                <span class="current-price">${formatPrice(p.priceUSD)}</span>
+                            </div>
+                            <div style="display: flex; gap: 6px;">
+                                <a href="product-detail.html?id=${p.id}" class="add-cart-card-btn" title="View Product Page">
+                                    <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 0.85rem;"></i>
+                                </a>
+                                <button class="add-cart-card-btn" onclick="addToCart('${p.id}')" title="Add to Cart">
+                                    <i class="fa-solid fa-bag-shopping"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+
+            // Filter Tabs Click Handlers
+            document.querySelectorAll(".filter-btn").forEach(btn => {
+                btn.onclick = () => {
+                    document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+                    btn.classList.add("active");
+                    currentFilter = btn.dataset.category;
+                    renderCatalog();
+                };
+            });
+        }
+
+        function handleCatalogLiveSearch(query) {
+            const q = query.trim().toLowerCase();
+            if (!q) { renderCatalog(); return; }
+            const all = getAllProducts();
+            const filtered = all.filter(p =>
+                p.title.toLowerCase().includes(q) ||
+                p.category.toLowerCase().includes(q) ||
+                p.movement.toLowerCase().includes(q)
+            );
+            renderCatalog(filtered);
+        }
+
+        function handleCatalogSort(val) {
+            let all = getAllProducts();
+            if (currentFilter !== "all") all = all.filter(p => p.category === currentFilter);
+            if (val === "price-asc") all.sort((a, b) => a.priceUSD - b.priceUSD);
+            if (val === "price-desc") all.sort((a, b) => b.priceUSD - a.priceUSD);
+            if (val === "rating") all.sort((a, b) => b.rating - a.rating);
+            renderCatalog(all);
+        }
+
+        // ==================== WATCH CASE OPEN / EXPLODED VIEW ====================
+        function openWatchExplodedView(id) {
+            const p = getProductById(id) || DEFAULT_PRODUCTS[0];
+            document.getElementById("explodedModalTitle").textContent = `${p.title.toUpperCase()} — MECHANICAL HEART`;
+            document.getElementById("explodedLayerImg").src = p.image;
+            document.getElementById("explodedDetailBtn").onclick = () => {
+                window.location.href = `product-detail.html?id=${p.id}`;
+            };
+            document.getElementById("watchExplodedModal").classList.add("active");
+        }
+
+        function closeWatchExplodedView() {
+            document.getElementById("watchExplodedModal").classList.remove("active");
+        }
+
+        function toggleCaseExplode() {
+            document.getElementById("watchOpenStage").classList.toggle("exploded");
+        }
+
+        // ==================== QUICK VIEW ====================
+        function openHomeQuickView(id) {
+            activeQvItem = getProductById(id);
+            if (!activeQvItem) return;
+
+            document.getElementById("qvImage").src = activeQvItem.image;
+            document.getElementById("qvCategory").textContent = activeQvItem.category.toUpperCase();
+            document.getElementById("qvTitle").textContent = activeQvItem.title;
+            document.getElementById("qvPrice").textContent = formatPrice(activeQvItem.priceUSD);
+            document.getElementById("qvDescription").textContent = activeQvItem.description;
+            document.getElementById("qvMovement").textContent = activeQvItem.movement;
+            document.getElementById("qvWater").textContent = activeQvItem.water;
+            document.getElementById("qvFullDetailLink").href = `product-detail.html?id=${activeQvItem.id}`;
+
+            document.getElementById("quickViewModal").classList.add("active");
+        }
+
+        function closeQuickView() {
+            document.getElementById("quickViewModal").classList.remove("active");
+        }
+
+        function addQvToCartDirect() {
+            if (activeQvItem) {
+                addToCart(activeQvItem.id);
+                closeQuickView();
+            }
+        }
+
+        // ==================== SEARCH ====================
+        function closeSearch() {
+            document.getElementById("searchOverlay").classList.remove("active");
+        }
+
+        function handleGlobalSearchInput(query) {
+            const list = document.getElementById("searchResultsList");
+            const q = query.trim().toLowerCase();
+            if (!q) {
+                list.innerHTML = '<p class="search-hint">Type above to instantly discover watches in our collection...</p>';
+                return;
+            }
+            const all = getAllProducts();
+            const matches = all.filter(p =>
+                p.title.toLowerCase().includes(q) ||
+                p.category.toLowerCase().includes(q) ||
+                p.movement.toLowerCase().includes(q)
+            );
+            if (matches.length === 0) {
+                list.innerHTML = '<p class="search-hint">No matching timepieces found.</p>';
+                return;
+            }
+            list.innerHTML = matches.map(m => `
+                <div class="search-result-item" onclick="window.location.href='product-detail.html?id=${m.id}'">
+                    <img src="${m.image}" alt="${m.title}" class="search-result-img">
+                    <div>
+                        <h4 class="search-result-title">${m.title}</h4>
+                        <div class="search-result-price">${formatPrice(m.priceUSD)} • <small>${m.movement}</small></div>
+                    </div>
+                </div>
+            `).join('');
+        }
+    </script>
+</body>
+</html>

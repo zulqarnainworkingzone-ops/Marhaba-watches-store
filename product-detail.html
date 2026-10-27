@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timepiece Details | CHRONOS ÉLITE Haute Horlogerie</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Shared Styles -->
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Product Detail Page Specific Luxury Styling */
+        .pd-section {
+            padding: 50px 0 80px;
+        }
+        .pd-breadcrumbs {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .pd-breadcrumbs a {
+            color: var(--text-secondary);
+        }
+        .pd-breadcrumbs a:hover {
+            color: var(--gold-light);
+        }
+        .pd-grid {
+            display: grid;
+            grid-template-columns: 1.1fr 1fr;
+            gap: 60px;
+            align-items: start;
+        }
+        .pd-gallery {
+            position: sticky;
+            top: 100px;
+        }
+        .pd-main-img-box {
+            position: relative;
+            background: radial-gradient(circle, #1a202c 0%, #0c0f16 80%);
+            border: 1px solid var(--border-active);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-card);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 500px;
+        }
+        .pd-main-img {
+            width: 100%;
+            height: 520px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .pd-main-img-box:hover .pd-main-img {
+            transform: scale(1.08);
+        }
+        .pd-thumbnails {
+            display: flex;
+            gap: 14px;
+            margin-top: 20px;
+        }
+        .pd-thumb {
+            width: 80px;
+            height: 80px;
+            border-radius: var(--radius-sm);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: #11141B;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+        .pd-thumb.active, .pd-thumb:hover {
+            border-color: var(--gold-primary);
+            box-shadow: 0 0 12px rgba(212, 175, 55, 0.35);
+        }
+        .pd-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .pd-info-box {
+            display: flex;
+            flex-direction: column;
+        }
+        .pd-tag-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+        .pd-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #FFF;
+            margin-bottom: 14px;
+            line-height: 1.2;
+        }
+        .pd-rating-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            font-size: 0.88rem;
+        }
+        .pd-stars {
+            color: #FFB703;
+        }
+        .pd-price-card {
+            background: rgba(212, 175, 55, 0.08);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-md);
+            padding: 20px 24px;
+            display: flex;
+            align-items: baseline;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+        .pd-current-price {
+            font-size: 2.2rem;
+            font-weight: 900;
+            font-family: var(--font-heading);
+            color: var(--gold-light);
+        }
+        .pd-old-price {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            text-decoration: line-through;
+        }
+        .pd-save-badge {
+            margin-left: auto;
+            background: #2EC4B6;
+            color: #07080B;
+            font-size: 0.75rem;
+            font-weight: 800;
+            padding: 4px 10px;
+            border-radius: var(--radius-full);
+        }
+        .pd-description {
+            font-size: 0.96rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 28px;
+        }
+        .pd-options-section {
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 22px 0;
+            margin-bottom: 28px;
+        }
+        .pd-swatch-group {
+            margin-bottom: 20px;
+        }
+        .pd-label {
+            display: block;
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: #FFF;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+        .pd-actions {
+            display: flex;
+            gap: 14px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        .pd-qty-box {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: var(--radius-sm);
+            padding: 8px 14px;
+        }
+        .pd-qty-btn {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            padding: 4px 10px;
+        }
+        .pd-qty-btn:hover {
+            color: var(--gold-primary);
+        }
+        .pd-qty-val {
+            font-size: 1.1rem;
+            font-weight: 700;
+            min-width: 32px;
+            text-align: center;
+        }
+        .specs-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+            margin-top: 15px;
+        }
+        .specs-table tr {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+        .specs-table td {
+            padding: 12px 6px;
+        }
+        .specs-table td:first-child {
+            color: var(--gold-primary);
+            font-weight: 600;
+            width: 35%;
+        }
+        .specs-table td:last-child {
+            color: var(--text-secondary);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- TOP ANNOUNCEMENT BAR -->
+    <div class="top-bar">
+        <div class="top-bar-container">
+            <div class="top-message">
+                <i class="fa-solid fa-crown"></i>
+                <span>Complimentary Worldwide Insured Express Delivery | 5-Year Global Movement Warranty</span>
+            </div>
+            <div class="top-actions">
+                <div class="currency-selector">
+                    <label for="currencySelect"><i class="fa-solid fa-globe"></i></label>
+                    <select id="currencySelect" class="currency-select" onchange="setCurrency(this.value)">
+                        <option value="USD">USD ($)</option>
+                        <option value="EUR">EUR (€)</option>
+                        <option value="GBP">GBP (£)</option>
+                        <option value="PKR">PKR (₨)</option>
+                    </select>
+                </div>
+                <div class="top-support">
+                    <i class="fa-brands fa-whatsapp"></i>
+                    <a href="https://wa.me/923001234567" target="_blank">Concierge: +92 300 1234567</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN HEADER -->
+    <header class="main-header" id="navbar">
+        <div class="header-container">
+            <a href="index.html" class="brand-logo">
+                <div class="logo-emblem">
+                    <svg viewBox="0 0 100 100" class="crown-svg">
+                        <circle cx="50" cy="50" r="46" stroke="url(#goldGrad)" stroke-width="2.5" fill="none"/>
+                        <circle cx="50" cy="50" r="41" stroke="#D4AF37" stroke-width="0.75" stroke-dasharray="3,3" fill="none"/>
+                        <path d="M50 18 L55 35 L70 30 L62 48 L75 58 L58 60 L50 78 L42 60 L25 58 L38 48 L30 30 L45 35 Z" fill="url(#goldGrad)" opacity="0.9"/>
+                        <circle cx="50" cy="50" r="4" fill="#FFFFFF"/>
+                        <defs>
+                            <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#FDF0CD"/>
+                                <stop offset="50%" stop-color="#D4AF37"/>
+                                <stop offset="100%" stop-color="#AA7A1E"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+                <div class="logo-text">
+                    <span class="brand-name">CHRONOS</span>
+                    <span class="brand-sub">ÉLITE GENÈVE</span>
+                </div>
+            </a>
+
+            <nav class="nav-menu">
+                <ul class="nav-list">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="index.html#collections" class="nav-link">Collections</a></li>
+                    <li><a href="cart.html" class="nav-link">Cart & Checkout</a></li>
+                    <li><a href="order-confirmation.html" class="nav-link">My Order Receipt</a></li>
+                    <li><a href="javascript:void(0)" onclick="openAddProductModal()" class="nav-link" style="color: #D4AF37;"><i class="fa-solid fa-plus-circle"></i> Add Watch</a></li>
+                </ul>
+            </nav>
+
+            <div class="nav-actions">
+                <a href="cart.html" class="nav-icon-btn" title="View Cart">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    <span class="badge cart-count-badge">0</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- PRODUCT DETAIL CONTENT -->
+    <main class="pd-section">
+        <div class="section-container">
+            
+            <div class="pd-breadcrumbs">
+                <a href="index.html"><i class="fa-solid fa-house"></i> Home</a>
+                <span>/</span>
+                <a href="index.html#collections">Collections</a>
+                <span>/</span>
+                <span id="breadcrumbTitle" style="color: var(--gold-light);">Timepiece Details</span>
+            </div>
+
+            <div class="pd-grid">
+                
+                <!-- Left: Interactive Gallery -->
+                <div class="pd-gallery">
+                    <div class="pd-main-img-box">
+                        <img src="assets/images/watch-1.jpg" id="pdMainImage" alt="Watch Main View" class="pd-main-img">
+                    </div>
+                    <div class="pd-thumbnails" id="pdThumbnails">
+                        <!-- Thumbnails dynamically rendered -->
+                    </div>
+                </div>
+
+                <!-- Right: Product Information & Buying Actions -->
+                <div class="pd-info-box">
+                    <div class="pd-tag-row" id="pdBadges">
+                        <span class="badge-tag gold">BESTSELLER</span>
+                        <span class="badge-tag dark">SWISS MADE</span>
+                    </div>
+
+                    <h1 class="pd-title" id="pdTitle">Sovereign Royal Chronograph</h1>
+
+                    <div class="pd-rating-row">
+                        <div class="pd-stars" id="pdStars">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <span id="pdReviewCount">(64 Collector Endorsements)</span>
+                        <span style="color: var(--text-muted);">•</span>
+                        <span style="color: #2EC4B6;"><i class="fa-solid fa-shield-check"></i> In Stock & Insured</span>
+                    </div>
+
+                    <div class="pd-price-card">
+                        <span class="pd-current-price" id="pdPrice">$4,850</span>
+                        <span class="pd-old-price" id="pdOldPrice">$5,400</span>
+                        <span class="pd-save-badge">SAVE 10%</span>
+                    </div>
+
+                    <p class="pd-description" id="pdDescription">
+                        An extraordinary horological triumph featuring polished 18-karat Swiss gold, obsidian ceramic bezel, and column-wheel chronograph mechanism.
+                    </p>
+
+                    <!-- Swatches -->
+                    <div class="pd-options-section">
+                        <div class="pd-swatch-group">
+                            <label class="pd-label">Select Dial Color: <span id="selectedDialLabel" style="color: var(--gold-light);">18K Gold Champagne</span></label>
+                            <div class="color-swatches">
+                                <button class="color-dot gold-dot active" title="18K Gold" onclick="selectDialVariant(this, '18K Gold Champagne')"></button>
+                                <button class="color-dot black-dot" title="Obsidian Noir" onclick="selectDialVariant(this, 'Obsidian Jet Black')"></button>
+                                <button class="color-dot blue-dot" title="Navy Ocean" onclick="selectDialVariant(this, 'Deep Ocean Sunburst')"></button>
+                                <button class="color-dot silver-dot" title="Silver Sunburst" onclick="selectDialVariant(this, 'Silver Rhodium')"></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Actions -->
+                    <div class="pd-actions">
+                        <div class="pd-qty-box">
+                            <button class="pd-qty-btn" onclick="adjustPdQty(-1)"><i class="fa-solid fa-minus"></i></button>
+                            <span class="pd-qty-val" id="pdQtyVal">1</span>
+                            <button class="pd-qty-btn" onclick="adjustPdQty(1)"><i class="fa-solid fa-plus"></i></button>
+                        </div>
+                        <button class="btn btn-primary btn-lg" onclick="handleAddToCartClick()" style="flex-grow: 1;">
+                            <i class="fa-solid fa-bag-shopping"></i> Add to Vault (Cart)
+                        </button>
+                        <button class="btn btn-whatsapp btn-lg" onclick="handleWhatsAppOrderClick()">
+                            <i class="fa-brands fa-whatsapp"></i> Buy via WhatsApp
+                        </button>
+                    </div>
+
+                    <!-- Technical Specifications Table -->
+                    <div style="margin-top: 20px;">
+                        <h3 style="font-size: 1.15rem; color: #FFF; margin-bottom: 8px;">Technical Horological Specifications</h3>
+                        <table class="specs-table">
+                            <tbody>
+                                <tr>
+                                    <td>Movement Calibre</td>
+                                    <td id="specMovement">In-House Calibre CH-900 Auto (72h Reserve)</td>
+                                </tr>
+                                <tr>
+                                    <td>Case Material</td>
+                                    <td id="specCase">18K Solid Swiss Gold & Obsidian Ceramic</td>
+                                </tr>
+                                <tr>
+                                    <td>Crystal Glass</td>
+                                    <td id="specGlass">Double-Domed Anti-Reflective Sapphire</td>
+                                </tr>
+                                <tr>
+                                    <td>Water Resistance</td>
+                                    <td id="specWater">100M / 10 BAR</td>
+                                </tr>
+                                <tr>
+                                    <td>Strap & Clasp</td>
+                                    <td id="specStrap">Italian Alligator Leather with Deployant Clasp</td>
+                                </tr>
+                                <tr>
+                                    <td>Warranty Coverage</td>
+                                    <td>5-Year International Movement Guarantee</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="main-footer">
+        <div class="footer-bottom">
+            <div class="footer-bottom-container">
+                <p>&copy; 2026 CHRONOS ÉLITE GENÈVE. All Rights Reserved.</p>
+                <div class="footer-legal">
+                    <a href="index.html">Home</a>
+                    <span>•</span>
+                    <a href="cart.html">Cart</a>
+                    <span>•</span>
+                    <a href="order-confirmation.html">Receipts</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- SHARED JS CORE -->
+    <script src="shared.js"></script>
+    <script>
+        let currentProduct = null;
+        let selectedQty = 1;
+        let selectedDial = "18K Gold Champagne";
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const params = new URLSearchParams(window.location.search);
+            const productId = params.get("id") || 1;
+            loadProductDetails(productId);
+
+            window.addEventListener("currencyChanged", () => {
+                if (currentProduct) renderPrice();
+            });
+        });
+
+        function loadProductDetails(id) {
+            currentProduct = getProductById(id) || DEFAULT_PRODUCTS[0];
+
+            document.title = `${currentProduct.title} | CHRONOS ÉLITE`;
+            document.getElementById("breadcrumbTitle").textContent = currentProduct.title;
+            document.getElementById("pdTitle").textContent = currentProduct.title;
+            document.getElementById("pdDescription").textContent = currentProduct.description;
+            document.getElementById("pdMainImage").src = currentProduct.image;
+            document.getElementById("specMovement").textContent = currentProduct.movement;
+            document.getElementById("specGlass").textContent = currentProduct.glass || "Anti-Reflective Sapphire";
+            document.getElementById("specWater").textContent = currentProduct.water;
+            document.getElementById("specCase").textContent = currentProduct.caseMaterial || "316L Surgical Grade Steel";
+            document.getElementById("specStrap").textContent = currentProduct.strap || "Italian Alligator Leather";
+
+            renderPrice();
+
+            // Render Thumbnails
+            const thumbContainer = document.getElementById("pdThumbnails");
+            const images = [currentProduct.image, "assets/images/banner-gold.jpg", "assets/images/banner-skeleton.jpg"];
+            thumbContainer.innerHTML = images.map((img, idx) => `
+                <div class="pd-thumb ${idx === 0 ? 'active' : ''}" onclick="switchMainImage('${img}', this)">
+                    <img src="${img}" alt="Angle ${idx + 1}">
+                </div>
+            `).join('');
+
+            // Badges
+            const badgeContainer = document.getElementById("pdBadges");
+            badgeContainer.innerHTML = currentProduct.badges.map(b => `<span class="badge-tag ${b.class}">${b.text}</span>`).join(' ');
+        }
+
+        function renderPrice() {
+            document.getElementById("pdPrice").textContent = formatPrice(currentProduct.priceUSD);
+            document.getElementById("pdOldPrice").textContent = formatPrice(currentProduct.oldPriceUSD || (currentProduct.priceUSD * 1.15));
+        }
+
+        function switchMainImage(src, thumbEl) {
+            document.getElementById("pdMainImage").src = src;
+            document.querySelectorAll(".pd-thumb").forEach(t => t.classList.remove("active"));
+            thumbEl.classList.add("active");
+        }
+
+        function selectDialVariant(btn, name) {
+            document.querySelectorAll(".color-dot").forEach(d => d.classList.remove("active"));
+            btn.classList.add("active");
+            selectedDial = name;
+            document.getElementById("selectedDialLabel").textContent = name;
+            showToast(`Selected Dial: ${name}`);
+        }
+
+        function adjustPdQty(delta) {
+            selectedQty = Math.max(1, selectedQty + delta);
+            document.getElementById("pdQtyVal").textContent = selectedQty;
+        }
+
+        function handleAddToCartClick() {
+            if (!currentProduct) return;
+            addToCart(currentProduct.id, selectedQty, selectedDial);
+        }
+
+        function handleWhatsAppOrderClick() {
+            if (!currentProduct) return;
+            const priceStr = formatPrice(currentProduct.priceUSD);
+            const msg = `Hello Chronos Élite Concierge,%0A%0AI would like to purchase this timepiece directly:%0A*Watch:* ${encodeURIComponent(currentProduct.title)}%0A*Dial Finish:* ${encodeURIComponent(selectedDial)}%0A*Quantity:* ${selectedQty}%0A*Unit Price:* ${priceStr}%0A%0APlease provide delivery timeline and bank/payment instructions.`;
+            window.open(`https://wa.me/${WHATSAPP_PHONE}?text=${msg}`, "_blank");
+        }
+    </script>
+</body>
+</html>

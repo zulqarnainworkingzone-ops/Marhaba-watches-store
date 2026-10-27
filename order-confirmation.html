@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmation & Invoice Receipt | CHRONOS ÉLITE</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Shared Styles -->
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .conf-section {
+            padding: 50px 0 90px;
+        }
+        .conf-container {
+            max-width: 820px;
+            margin: 0 auto;
+        }
+        .timeline-box {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin: 30px 0 40px;
+            position: relative;
+        }
+        .timeline-step {
+            text-align: center;
+            position: relative;
+        }
+        .timeline-circle {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: #121620;
+            border: 2px solid var(--border-active);
+            color: var(--gold-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 10px;
+            font-size: 1.1rem;
+            position: relative;
+            z-index: 2;
+        }
+        .timeline-step.completed .timeline-circle {
+            background: var(--gold-gradient);
+            color: #07080B;
+            border-color: transparent;
+        }
+        .timeline-step h5 {
+            font-size: 0.82rem;
+            color: #FFF;
+            margin-bottom: 2px;
+        }
+        .timeline-step p {
+            font-size: 0.72rem;
+            color: var(--text-muted);
+        }
+        .invoice-card {
+            background: #0E121A;
+            border: 1px solid var(--border-active);
+            border-radius: var(--radius-md);
+            padding: 40px;
+            box-shadow: var(--shadow-card);
+        }
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+            #printableInvoiceArea, #printableInvoiceArea * {
+                visibility: visible;
+                color: #000 !important;
+                background: #FFF !important;
+            }
+            #printableInvoiceArea {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- TOP ANNOUNCEMENT BAR -->
+    <div class="top-bar">
+        <div class="top-bar-container">
+            <div class="top-message">
+                <i class="fa-solid fa-crown"></i>
+                <span>Your Acquisition has been Registered with the Genevan Horology Archives</span>
+            </div>
+            <div class="top-actions">
+                <div class="top-support">
+                    <i class="fa-brands fa-whatsapp"></i>
+                    <a href="https://wa.me/923001234567" target="_blank">Concierge Helpline: +92 300 1234567</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN HEADER -->
+    <header class="main-header">
+        <div class="header-container">
+            <a href="index.html" class="brand-logo">
+                <div class="logo-emblem">
+                    <svg viewBox="0 0 100 100" class="crown-svg">
+                        <circle cx="50" cy="50" r="46" stroke="url(#goldGrad)" stroke-width="2.5" fill="none"/>
+                        <circle cx="50" cy="50" r="41" stroke="#D4AF37" stroke-width="0.75" stroke-dasharray="3,3" fill="none"/>
+                        <path d="M50 18 L55 35 L70 30 L62 48 L75 58 L58 60 L50 78 L42 60 L25 58 L38 48 L30 30 L45 35 Z" fill="url(#goldGrad)" opacity="0.9"/>
+                        <circle cx="50" cy="50" r="4" fill="#FFFFFF"/>
+                        <defs>
+                            <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#FDF0CD"/>
+                                <stop offset="50%" stop-color="#D4AF37"/>
+                                <stop offset="100%" stop-color="#AA7A1E"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                </div>
+                <div class="logo-text">
+                    <span class="brand-name">CHRONOS</span>
+                    <span class="brand-sub">ÉLITE GENÈVE</span>
+                </div>
+            </a>
+
+            <nav class="nav-menu">
+                <ul class="nav-list">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="index.html#collections" class="nav-link">Collections</a></li>
+                    <li><a href="cart.html" class="nav-link">Cart & Checkout</a></li>
+                    <li><a href="order-confirmation.html" class="nav-link active">My Order Receipt</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="conf-section">
+        <div class="conf-container">
+            
+            <div style="text-align: center; margin-bottom: 30px;">
+                <div style="width: 70px; height: 70px; border-radius: 50%; background: rgba(46, 196, 182, 0.15); border: 2px solid #2EC4B6; color: #2EC4B6; display: flex; align-items: center; justify-content: center; font-size: 2.2rem; margin: 0 auto 16px;">
+                    <i class="fa-solid fa-check"></i>
+                </div>
+                <h1 style="font-size: 2.4rem; color: #FFF; margin-bottom: 6px;">PURCHASE CONGRATULATIONS</h1>
+                <p style="color: var(--text-secondary); font-size: 0.95rem;">Your bespoke horological acquisition is securely locked in our workshop queue.</p>
+                <div style="display: inline-block; margin-top: 10px; padding: 6px 18px; background: rgba(212, 175, 55, 0.15); border: 1px solid var(--gold-primary); border-radius: var(--radius-full); color: var(--gold-light); font-weight: 700;">
+                    Order Reference: <span id="confOrderRef">#CH-89241</span>
+                </div>
+            </div>
+
+            <!-- Fulfillment Progress Timeline -->
+            <div class="timeline-box">
+                <div class="timeline-step completed">
+                    <div class="timeline-circle"><i class="fa-solid fa-file-invoice"></i></div>
+                    <h5>Order Placed</h5>
+                    <p>Confirmed & Logged</p>
+                </div>
+                <div class="timeline-step completed">
+                    <div class="timeline-circle"><i class="fa-solid fa-microscope"></i></div>
+                    <h5>Atelier Quality Seal</h5>
+                    <p>Chronometer Verification</p>
+                </div>
+                <div class="timeline-step">
+                    <div class="timeline-circle"><i class="fa-solid fa-box-archive"></i></div>
+                    <h5>Armored Box</h5>
+                    <p>Tamper-Proof Sealing</p>
+                </div>
+                <div class="timeline-step">
+                    <div class="timeline-circle"><i class="fa-solid fa-truck-fast"></i></div>
+                    <h5>Insured Dispatch</h5>
+                    <p>Doorstep Delivery</p>
+                </div>
+            </div>
+
+            <!-- Printable Official Invoice -->
+            <div class="invoice-card" id="printableInvoiceArea">
+                <div class="receipt-brand-row">
+                    <div>
+                        <h2 style="font-size: 1.5rem; color: #FFF;">CHRONOS ÉLITE GENÈVE</h2>
+                        <small style="color: var(--gold-primary); letter-spacing: 2px; text-transform: uppercase;">Official Haute Horlogerie Certificate</small>
+                    </div>
+                    <div style="text-align: right;">
+                        <span id="confOrderDate" style="color: var(--text-secondary); font-size: 0.85rem;">October 28, 2026</span>
+                    </div>
+                </div>
+
+                <hr class="receipt-hr">
+
+                <div id="confClientDetails" style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.7;">
+                    <!-- Filled by JS -->
+                </div>
+
+                <hr class="receipt-hr">
+
+                <table class="receipt-table" style="margin: 16px 0;">
+                    <thead>
+                        <tr>
+                            <th>Acquired Timepiece</th>
+                            <th>Qty</th>
+                            <th>Unit Price</th>
+                            <th style="text-align: right;">Total</th>
+                        </tr>
+                    </thead>
+                    <tbody id="confItemsBody">
+                        <!-- Filled by JS -->
+                    </tbody>
+                </table>
+
+                <hr class="receipt-hr">
+
+                <div class="receipt-total-row">
+                    <strong>Total Acquisition Value:</strong>
+                    <strong class="receipt-grand" id="confGrandTotal">$0.00</strong>
+                </div>
+
+                <div class="receipt-status-badge" style="margin-top: 16px;">
+                    Payment Method: <strong id="confPaymentMethod">Cash on Delivery (COD)</strong>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div style="display: flex; gap: 14px; justify-content: center; margin-top: 30px; flex-wrap: wrap;">
+                <button class="btn btn-primary" onclick="window.print()">
+                    <i class="fa-solid fa-print"></i> Print Official Invoice
+                </button>
+                <button class="btn btn-whatsapp" id="confWhatsAppBtn">
+                    <i class="fa-brands fa-whatsapp"></i> Send Invoice to WhatsApp
+                </button>
+                <a href="index.html" class="btn btn-outline">
+                    Return to Atelier Home
+                </a>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="main-footer">
+        <div class="footer-bottom">
+            <div class="footer-bottom-container">
+                <p>&copy; 2026 CHRONOS ÉLITE GENÈVE. All Rights Reserved.</p>
+                <div class="footer-legal">
+                    <a href="index.html">Home</a>
+                    <span>•</span>
+                    <a href="cart.html">Cart</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- SHARED JS CORE -->
+    <script src="shared.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const rawOrder = localStorage.getItem("chronos_last_order");
+            let order = null;
+
+            if (rawOrder) {
+                try { order = JSON.parse(rawOrder); } catch(e) {}
+            }
+
+            // Fallback sample order if user lands here directly
+            if (!order) {
+                order = {
+                    orderNumber: "CH-89241",
+                    date: new Date().toLocaleDateString("en-US", { year: 'numeric', month: 'long', day: 'numeric' }),
+                    customer: {
+                        name: "Valued Collector",
+                        phone: "+92 300 1234567",
+                        email: "client@chronos-elite.ch",
+                        city: "Lahore, Pakistan",
+                        address: "Suite 402, Royal Residency, Boulevard Heights",
+                        notes: "Complimentary luxury gift packaging"
+                    },
+                    items: [
+                        {
+                            title: "Sovereign Royal Chronograph",
+                            meta: "In-House Calibre CH-900 Auto",
+                            quantity: 1,
+                            priceUSD: 4850
+                        }
+                    ],
+                    paymentMethod: "Cash on Delivery (COD)",
+                    total: 4850
+                };
+            }
+
+            document.getElementById("confOrderRef").textContent = `#${order.orderNumber}`;
+            document.getElementById("confOrderDate").textContent = order.date;
+            document.getElementById("confPaymentMethod").textContent = order.paymentMethod;
+            document.getElementById("confGrandTotal").textContent = formatPrice(order.total);
+
+            // Client Info
+            document.getElementById("confClientDetails").innerHTML = `
+                <strong>Client Name:</strong> ${order.customer.name}<br>
+                <strong>Contact WhatsApp / Phone:</strong> ${order.customer.phone} | <strong>Email:</strong> ${order.customer.email}<br>
+                <strong>Insured Shipping Destination:</strong> ${order.customer.address}, ${order.customer.city}<br>
+                ${order.customer.notes ? `<strong>Collector's Notes:</strong> ${order.customer.notes}<br>` : ''}
+                <strong>Warranty Included:</strong> 5-Year Global Movement Guarantee & Microscopic Chronometer Certificate
+            `;
+
+            // Items Table
+            document.getElementById("confItemsBody").innerHTML = order.items.map(item => `
+                <tr>
+                    <td>
+                        <strong>${item.title}</strong><br>
+                        <small style="color: #A67C1E;">${item.meta}</small>
+                    </td>
+                    <td>${item.quantity}</td>
+                    <td>${formatPrice(item.priceUSD)}</td>
+                    <td style="text-align: right;">${formatPrice(item.priceUSD * item.quantity)}</td>
+                </tr>
+            `).join('');
+
+            // WhatsApp send button
+            document.getElementById("confWhatsAppBtn").onclick = () => {
+                const itemsStr = order.items.map(i => `• ${i.title} (${i.quantity}x)`).join('%0A');
+                const msg = `*CHRONOS ÉLITE GENÈVE — ORDER RECEIPT*%0A*Order Reference:* %23${order.orderNumber}%0A*Client:* ${encodeURIComponent(order.customer.name)}%0A*Phone:* ${encodeURIComponent(order.customer.phone)}%0A*Address:* ${encodeURIComponent(order.customer.address)}, ${encodeURIComponent(order.customer.city)}%0A*Payment:* ${encodeURIComponent(order.paymentMethod)}%0A%0A*Purchased Timepieces:*%0A${itemsStr}%0A%0A*Total Amount:* ${formatPrice(order.total)}%0A%0APlease confirm dispatch and courier tracking number.`;
+                window.open(`https://wa.me/${WHATSAPP_PHONE}?text=${msg}`, "_blank");
+            };
+        });
+    </script>
+</body>
+</html>
